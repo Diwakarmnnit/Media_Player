@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.media.MediaView?>
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#previousPressed" prefHeight="512.0" prefWidth="854.0" styleClass="body" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="m_player.FXMLDocumentController">
+   <center>
+      <MediaView fx:id="mv" fitHeight="200.0" fitWidth="200.0" onDragDropped="#handleDrop" onDragOver="#handleOver" onMouseClicked="#pauseClicked" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <HBox fx:id="box" prefHeight="29.0" prefWidth="688.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="menue" prefHeight="26.0" prefWidth="304.0" style="-fx-background-color: white;">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="close" mnemonicParsing="false" onAction="#close" text="Close" />
+                        <MenuItem mnemonicParsing="false" onAction="#create" text="Create Playlist" />
+                        <MenuItem fx:id="add" mnemonicParsing="false" onAction="#add" text="Choose file..." />
+                        <MenuItem fx:id="addperm" mnemonicParsing="false" onAction="#addToPerm" text="Add to Playlist" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="PlayOptions">
+                     <items>
+                        <MenuItem fx:id="playall" mnemonicParsing="false" onAction="#playAll" text="Play Unsaved Sequentially" />
+                        <MenuItem fx:id="rand" mnemonicParsing="false" onAction="#buttrand" text="ShufflePlay" />
+                        <MenuItem mnemonicParsing="false" onAction="#play_playlist" text="Play Saved Sequentially" />
+                        <MenuItem mnemonicParsing="false" onAction="#sort" text="Sort Play" />
+                     </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Search Songs">
+                  <items>
+                    <MenuItem fx:id="artist" mnemonicParsing="false" onAction="#search_buttonartist" text="Search by Artist" />
+                        <MenuItem fx:id="album" mnemonicParsing="false" onAction="#search_buttonalbum" text="Search by Album" />
+                        <MenuItem fx:id="songname" mnemonicParsing="false" onAction="#search_buttonname" text="Search by Name" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" onAction="#shortcuts" text="SHORTCUTS">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#shortcuts" text="Shortcuts" />
+                     </items>
+                  </Menu>
+              </menus>
+              <!-- <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor> --> 
+               <effect>
+                  <Glow level="0.0" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuBar>
+            <ComboBox fx:id="ls" onAction="#playDragged" prefWidth="150.0" promptText="Play dragged/added" style="-fx-background-color: white; -fx-background-radius: 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <MenuButton mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 0;" text="Rating Options">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#addrating" text="Rate the Song" />
+                <MenuItem mnemonicParsing="false" onAction="#getrating" text="See Rating Of song" />
+              </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MenuButton>
+            <ComboBox fx:id="searched" onAction="#searchedPlay" prefHeight="25.0" prefWidth="124.0" promptText="Searched Items" style="-fx-background-color: white; -fx-background-radius: 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <ComboBox fx:id="selectp" onAction="#selectedplaylistplay" prefWidth="150.0" promptText="Selected Playlist" style="-fx-background-color: white; -fx-background-radius: 0;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+         </children>
+      </HBox>
+   </top>
+   <bottom>
+      <AnchorPane fx:id="anc" onMouseEntered="#labelVisible" onMouseExited="#labelInVisible" prefHeight="100.0" prefWidth="689.0" BorderPane.alignment="BOTTOM_CENTER">
+         <children>
+           <!-- <Button fx:id="prev" layoutX="98.0" layoutY="144.0" mnemonicParsing="false" onAction="#prev" text="&lt;&lt;" /> -->
+            <Button fx:id="next" layoutX="146.0" layoutY="144.0" mnemonicParsing="false" onAction="#next" style="-fx-background-color: white;" text="&gt;&gt;" />
+            <Button fx:id="stop" layoutX="201.0" layoutY="144.0" mnemonicParsing="false" onAction="#stop" style="-fx-background-color: white;" text="Stop" />
+            <Slider fx:id="volume" layoutX="535.0" layoutY="149.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" />
+            <Button fx:id="prev" layoutX="94.0" layoutY="144.0" mnemonicParsing="false" onAction="#prev" prefHeight="20.0" prefWidth="34.0" style="-fx-background-color: white;" text="&lt;&lt;" />
+            <Button fx:id="toggle" layoutY="144.0" mnemonicParsing="false" onAction="#pl_pa" style="-fx-background-color: white;" text="Play/Pause" />
+            <MenuButton layoutX="262.0" layoutY="144.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Speed">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#slow1" text="0.25x" />
+                <MenuItem mnemonicParsing="false" onAction="#slow2" text="0.5x" />
+                  <MenuItem mnemonicParsing="false" onAction="#slow3" text="0.75x" />
+                  <MenuItem mnemonicParsing="false" onAction="#normal" text="Normal" />
+                  <MenuItem mnemonicParsing="false" onAction="#fast1" text="1.25x" />
+                  <MenuItem mnemonicParsing="false" onAction="#fast2" text="1.5x" />
+                  <MenuItem mnemonicParsing="false" onAction="#fast3" text="2x" />
+              </items>
+            </MenuButton>
+            <MenuButton layoutX="345.0" layoutY="144.0" mnemonicParsing="false" style="-fx-background-color: white;" text="BackGround Options">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#InvisibleMV" text=" Audio Only" />
+                <MenuItem mnemonicParsing="false" onAction="#visibleMV" text="Back to Video" />
+              </items>
+            </MenuButton>
+            <Slider fx:id="slider" layoutX="4.0" layoutY="71.0" max="60.0" prefHeight="10.0" prefWidth="847.0" value="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Label fx:id="st" layoutX="1.0" layoutY="93.0" prefHeight="28.0" prefWidth="73.0" />
+            <Label fx:id="end" layoutX="796.0" layoutY="93.0" prefHeight="21.0" prefWidth="43.0" AnchorPane.bottomAnchor="57.0" AnchorPane.rightAnchor="0.0" />
+            <ComboBox fx:id="mostplayed" layoutX="502.0" layoutY="147.0" onAction="#MOSTPLAYEDPLAYING" prefHeight="25.0" prefWidth="108.0" promptText="Most Played" style="-fx-background-color: white;" />
+            <Button layoutX="631.0" layoutY="146.0" mnemonicParsing="false" onAction="#mostPlayedTracker" style="-fx-background-color: white;" text="Refresh" />
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </AnchorPane>
+   </bottom>
+</BorderPane>
